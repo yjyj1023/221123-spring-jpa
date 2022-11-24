@@ -12,3 +12,6 @@ spring:
     url: localhost
     username: root
     password: password
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
