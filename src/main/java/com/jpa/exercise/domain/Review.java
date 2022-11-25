@@ -1,5 +1,6 @@
 package com.jpa.exercise.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +22,7 @@ public class Review {
     private String content;
     private String userName;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;

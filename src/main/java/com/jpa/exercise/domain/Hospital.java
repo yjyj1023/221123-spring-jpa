@@ -1,5 +1,6 @@
 package com.jpa.exercise.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,7 @@ public class Hospital {
     private String roadNameAddress;
     private String hospitalName;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
     private List<Review> reviews;
 }
