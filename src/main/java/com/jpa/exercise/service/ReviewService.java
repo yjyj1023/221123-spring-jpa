@@ -51,9 +51,30 @@ public class ReviewService {
         return ReviewResponse.of(review);
     }
 
+    public List<HospitalResponse> findHospitals(Pageable pageable) {
+        Page<Hospital> hospitals = hospitalRepository.findAll(pageable);
+        List<HospitalResponse> hospitalResponses = hospitals.stream()
+                .map(hospital -> HospitalResponse.of(hospital)).collect(Collectors.toList());
+        return hospitalResponses;
+    }
+
     public HospitalResponse findByHospitals(Integer id) {
         Optional<Hospital> optHospital = hospitalRepository.findById(id);
         Hospital hospital = optHospital.get();
         return HospitalResponse.of(hospital);
+    }
+
+    public List<ReviewResponse> findAllByHospitalId(Integer id) {
+        Hospital hospital = hospitalRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("해당 id가 없습니다."));
+        List<ReviewResponse> reviews = reviewRepository.findByHospital(hospital)
+                .stream().map(review -> ReviewResponse.builder()
+                        .id(review.getId())
+                        .title(review.getTitle())
+                        .content(review.getContent())
+                        .userName(review.getUserName())
+                        .build()
+                ).collect(Collectors.toList());
+        return reviews;
     }
 }

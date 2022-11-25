@@ -24,13 +24,24 @@ public class HospitalController {
     }
 
     @GetMapping("/hospitals/{id}")
-    public ResponseEntity<HospitalResponse> hospitalReview(@PathVariable Integer id) {
+    public ResponseEntity<HospitalResponse> oneHospital(@PathVariable Integer id) {
         HospitalResponse hospitalResponse = reviewService.findByHospitals(id);
         return ResponseEntity.ok().body(hospitalResponse);
     }
 
+    @GetMapping("/hospitals/{id}/reviews")
+    public ResponseEntity<List<ReviewResponse>> oneHospitalReviews(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(reviewService.findAllByHospitalId(id));
+    }
+
+
+    @GetMapping("/hospitals")
+    public ResponseEntity<List<HospitalResponse>> hospitalList(Pageable pageable) {
+        return ResponseEntity.ok().body(reviewService.findHospitals(pageable));
+    }
+
     @GetMapping("/reviews")
-    public ResponseEntity<List<ReviewResponse>> list(Pageable pageable){
+    public ResponseEntity<List<ReviewResponse>> reviewsList(Pageable pageable){
         return ResponseEntity.ok().body(reviewService.findReviews(pageable));
     }
 
