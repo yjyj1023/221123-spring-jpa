@@ -34,7 +34,7 @@ public class ReviewService {
                 .hospital(hospital.get())
                 .build();
         Review savedReview = reviewRepository.save(review);
-        return new ReviewCreateResponse(savedReview.getId(), savedReview.getTitle(), savedReview.getContent(), savedReview.getContent(),
+        return new ReviewCreateResponse(savedReview.getId(), savedReview.getTitle(), savedReview.getContent(), savedReview.getUserName(),
                 "리뷰 등록이 성공 했습니다.");
     }
 

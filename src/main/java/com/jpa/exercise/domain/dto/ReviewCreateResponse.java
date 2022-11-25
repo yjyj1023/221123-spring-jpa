@@ -1,6 +1,5 @@
 package com.jpa.exercise.domain.dto;
 
-import com.jpa.exercise.domain.Book;
 import com.jpa.exercise.domain.Review;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
